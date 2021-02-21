@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: python-mq-consumer
+    service: python-mq-consumer
+  name: python-mq-consumer
+spec:
+  selector:
+    matchLabels:
+      app: python-mq-consumer
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: python-mq-consumer
+        service: python-mq-consumer
+    spec:
+      containers:
+        - name: python-mq-consumer
+          image: amjad489/python_mq_reciever:0.6
+          env:
+            - name: RABBITMQ_PORT
+              value: "5672"
+            - name: RABBITMQ_HOST
+              value: rabbitmq.devops.svc.cluster.local
+            - name: RABBITMQ_QUEUE
+              value: hello

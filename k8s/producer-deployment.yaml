@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: python-mq-producer
+    service: python-mq-producer
+  name: python-mq-producer
+spec:
+  selector:
+    matchLabels:
+      app: python-mq-producer
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: python-mq-producer
+        service: python-mq-producer
+    spec:
+      containers:
+        - name: python-mq-producer
+          image: amjad489/python_mq_send:0.6
+          env:
+            - name: RABBITMQ_PORT
+              value: "5672"
+            - name: RABBITMQ_HOST
+              value: rabbitmq.devops.svc.cluster.local
