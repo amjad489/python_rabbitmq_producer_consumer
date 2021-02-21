@@ -1,5 +1,6 @@
 # python_rabbitmq_producer_consumer
 This is repo contains code to test rabbitmq by sending and receiving dummy data. It uses *`pika`* library to generate data.
+The code is used from the default example from the official pika library github page and has been updated accordingly.
 
 ## Dependencies
  - Python 3
